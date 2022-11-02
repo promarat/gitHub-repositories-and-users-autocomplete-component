@@ -97,7 +97,7 @@ const AutoComplete = () => {
             <em>API error</em>
           </div>
         )
-      } else {
+      } else if (!loading) {
         return (
           <div className="no-suggestion">
             <em>Not found</em>
