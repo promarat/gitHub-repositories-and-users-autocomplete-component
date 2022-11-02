@@ -44,7 +44,7 @@ const AutoComplete = () => {
 
     const suggestions: SearchResultType[] = [...users.result, ...repos.result]
       .sort((a, b) => a.name.localeCompare(b.name))
-      .slice(DISPLAY_LIMIT);
+      .slice(0, DISPLAY_LIMIT);
     setFiltered(suggestions);
     setActive(0);
   }
