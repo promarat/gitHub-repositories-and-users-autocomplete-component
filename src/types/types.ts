@@ -3,3 +3,8 @@ export type SearchResultType = {
   login: string,
   name: string,
 };
+
+export interface GithubResponse {
+  status: number,
+  result: SearchResultType[],
+};

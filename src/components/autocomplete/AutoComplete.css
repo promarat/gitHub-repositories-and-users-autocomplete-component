@@ -1,12 +1,10 @@
 .searchform {
-  position: relative;
-  max-width: 300px;
+  position: relative
 }
 
 .searchform-input {
+  width: 400px;
   padding: 8px;
-  
-  width: 100%;
   border: 1px solid #bbb;
   box-shadow: inset 0 2px 2px rgba(0, 0, 0, .1);
 }
@@ -14,5 +12,46 @@
 .searchform-icon {
   position: absolute;
   top: 8px;
-  right: 0;
+  right: 8px;
+}
+
+.no-suggestion {
+  color: #999;
+  padding: 8px;
+}
+
+.api-error {
+  color: #ef4444;
+  padding: 8px;
+}
+
+.suggestions {
+  border: 1px solid #999;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-left: 0;
+  width: calc(400px + 1rem);
+}
+
+.suggestion-active,
+.suggestions li:hover {
+  background-color: #aaa;
+  /* color: #fae042; */
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.suggestions li:not(:last-of-type) {
+  border-bottom: 1px solid #999;
+}
+
+.suggestion {
+  padding: 0.5rem;
+  display: flex;
+  flex:auto;
+  text-decoration: none;
+  color: black;
 }

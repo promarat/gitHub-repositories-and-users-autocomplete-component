@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SearchResultType } from '../types/types';
+import { GithubResponse } from '../types/types';
 
 export const PER_PAGE = 50;
 
@@ -12,7 +12,7 @@ if (token) {
   github.defaults.headers.common.Authorization = `token ${token}`;
 }
 
-const searchUsers = async (query: string): Promise<SearchResultType[]> => {
+const searchUsers = async (query: string): Promise<GithubResponse> => {
   const params = {
     q: query,
     per_page: PER_PAGE,
@@ -23,20 +23,24 @@ const searchUsers = async (query: string): Promise<SearchResultType[]> => {
     })
     .then(response => {
       if (response.status === 200) {
-        return response.data?.items.map((item: any) => {
+        const result = response.data?.items.map((item: any) => {
           return {
             type: 'user',
             name: item.login,
             login: item.login,
           };
         });
+        return { status: response.status, result };
       } else {
-        return [];
+        return { status: response.status, result: [] };
       }
+    })
+    .catch(error => {
+      return { status: error.response.status, result: [] };
     });
 }
 
-const searchRepositories = async (query: string): Promise<SearchResultType[]> => {
+const searchRepositories = async (query: string): Promise<GithubResponse> => {
   const params = {
     q: query,
     per_page: PER_PAGE,
@@ -47,16 +51,20 @@ const searchRepositories = async (query: string): Promise<SearchResultType[]> =>
     })
     .then(response => {
       if (response.status === 200) {
-        return response.data?.items.map((item: any) => {
+        const result = response.data?.items.map((item: any) => {
           return {
             type: 'repo',
             name: item.name,
             login: item.owner.login,
           };
-        })
+        });
+        return { status: response.status, result };
       } else {
-        return [];
+        return { status: response.status, result: [] };
       }
+    })
+    .catch(error => {
+      return { status: error.response.status, result: [] };
     });
 }
 
